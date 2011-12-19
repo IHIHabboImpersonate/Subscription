@@ -32,20 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Messages\MSubscriptionInfo.cs" />
     <Compile Include="PacketHandlers.cs" />
     <Compile Include="SubscriptionCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PacketSenders.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Server\Server.csproj">
@@ -53,7 +43,7 @@
       <Name>Server</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\PID1_Subscriptions\LIB-Subscriptions.csproj">
+    <ProjectReference Include="..\..\Plugins\PID1_Subscriptions\LIB-Subscriptions.csproj">
       <Project>{6A3B8DCA-DCD6-4C55-B9F4-DF0A8E26832A}</Project>
       <Name>LIB-Subscriptions</Name>
       <Private>False</Private>

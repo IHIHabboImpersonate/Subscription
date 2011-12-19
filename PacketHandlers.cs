@@ -11,24 +11,24 @@ namespace IHI.Server.Plugins.Cecer1.Subscriptions
             var target = source as Habbo;
             if (target == null)
                 return;
-                target.
-                    GetConnection().
-                        AddHandler(26, PacketHandlerPriority.DefaultAction, ProcessRequestSubscriptionData);
+            target.
+                GetConnection().
+                AddHandler(26, PacketHandlerPriority.DefaultAction, ProcessRequestSubscriptionData);
         }
 
         private static void ProcessRequestSubscriptionData(Habbo sender, IncomingMessage message)
         {
-            var subscriptionName = message.PopPrefixedString();
+            string subscriptionName = message.PopPrefixedString();
 
             var data = new SubscriptionData(sender, subscriptionName);
 
-            // 86400    = 24 hours in seconds.
-            // 2678400  = 31 days in seconds.
-            var remainingFullMonths = (byte) (data.GetRemainingSeconds()/2678400);
-            var expiredFullMonths = (byte) (data.GetExpiredSeconds()/2678400);
-            var expiredMonthDays = (byte) ((data.GetExpiredSeconds()%2678400)/86400);
-
-            //Sender.GetPacketSender().Send_SubscriptionInfo(SubscriptionName, ExpiredMonthDays, ExpiredFullMonths, RemainingFullMonths, Data.IsActive());
+            new MSubscriptionInfo
+                {
+                    CurrentDay = (data.GetExpiredSeconds() % 2678400) / 86400,
+                    ElapsedMonths = data.GetExpiredSeconds() / 2678400,
+                    PrepaidMonths = data.GetRemainingSeconds() / 2678400,
+                    IsActive = data.IsActive()
+                }.Send(sender);
         }
     }
 }
